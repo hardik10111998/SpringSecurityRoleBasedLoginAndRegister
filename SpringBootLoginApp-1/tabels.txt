@@ -1,0 +1,28 @@
+//
+CREATE TABLE `auth_role` (
+  `auth_role_id` int NOT NULL AUTO_INCREMENT,
+  `role_name` varchar(255) DEFAULT NULL,
+  `role_desc` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`auth_role_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+//----------------------------------------------
+CREATE TABLE `auth_user` (
+  `auth_user_id` int NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(255) NOT NULL,
+  `last_name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`auth_user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+//---------------------------------------
+CREATE TABLE `auth_user_role` (
+  `auth_user_id` int NOT NULL,
+  `auth_role_id` int NOT NULL,
+  PRIMARY KEY (`auth_user_id`,`auth_role_id`),
+  KEY `FK_user_role` (`auth_role_id`),
+  CONSTRAINT `FK_auth_user` FOREIGN KEY (`auth_user_id`) REFERENCES `auth_user` (`auth_user_id`),
+  CONSTRAINT `FK_auth_user_role` FOREIGN KEY (`auth_role_id`) REFERENCES `auth_role` (`auth_role_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
